@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Code for Drive Systems Magnetic Circuits and Materials</title>
+<meta name="author" content="Daniel McGuiness" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" href="config/style.css">
+<script type="text/javascript"  src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="config/test.js">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+// @license-end
+</script>
+
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+// @license-end
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href=""> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">Code for Drive Systems Magnetic Circuits and Materials</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org69d6bbd">Introduction</a></li>
+<li><a href="#orgbd1f7bb">Hysteresis Model</a>
+<ul>
+<li><a href="#org22e6fec">Atomic Structure of Electric Grain Steel</a></li>
+</ul>
+</li>
+<li><a href="#orgdec98e5">Magnetic Field Lines</a></li>
+</ul>
+</div>
+</div>
+<p>
+These are the code snippets used in <code>Magnetic Circuits and Materials</code>
+part of <code>Drive Systems</code>.
+</p>
+
+<div id="outline-container-org69d6bbd" class="outline-2">
+<h2 id="org69d6bbd">Introduction</h2>
+<div class="outline-text-2" id="text-org69d6bbd">
+<p>
+The following code uses the standard matplotlib along with the
+custom ChalcedonPy which is detailed in its source code here.
+</p>
+
+<p>
+The code is used primarily in the following code as a means to
+save figures for use in slides.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgeccaf61"><span class="org-keyword">import</span> matplotlib.pyplot <span class="org-keyword">as</span> plt
+<span class="org-keyword">import</span> ChalcedonPy <span class="org-keyword">as</span> cp
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialise ChalcedonPy</span>
+cp.init<span class="org-rainbow-delimiters-depth-1">(</span>save_path<span class="org-operator">=</span><span class="org-string">"Magnetic-Circuits-and-Materials"</span>,
+        display_mode<span class="org-operator">=</span><span class="org-string">"web"</span><span class="org-rainbow-delimiters-depth-1">)</span> 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbd1f7bb" class="outline-2">
+<h2 id="orgbd1f7bb">Hysteresis Model</h2>
+<div class="outline-text-2" id="text-orgbd1f7bb">
+<p>
+In electromagnetism and materials science, the Jiles–Atherton model of
+magnetic hysteresis was introduced in 1984 by David Jiles and D. L. Atherton.
+This is one of the most popular models of magnetic hysteresis.
+Its main advantage is the fact that this model enables connection with
+physical parameters of the magnetic material.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org9faeb21"><span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+<span class="org-keyword">from</span> scipy.constants <span class="org-keyword">import</span> mu_0
+
+<span class="org-variable-name">a</span> <span class="org-operator">=</span> 470 <span class="org-comment-delimiter"># </span><span class="org-comment">A/m</span>
+<span class="org-variable-name">alpha</span> <span class="org-operator">=</span> 9.38e<span class="org-operator">-</span>4
+<span class="org-variable-name">c</span> <span class="org-operator">=</span> 0.0889
+<span class="org-variable-name">k</span> <span class="org-operator">=</span> 483 <span class="org-comment-delimiter"># </span><span class="org-comment">A/m</span>
+<span class="org-variable-name">Ms</span> <span class="org-operator">=</span> 1.48e6 <span class="org-comment-delimiter"># </span><span class="org-comment">A/m</span>
+
+<span class="org-variable-name">H</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>0<span class="org-rainbow-delimiters-depth-1">]</span>
+<span class="org-variable-name">delta</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>0<span class="org-rainbow-delimiters-depth-1">]</span>
+<span class="org-variable-name">Man</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>0<span class="org-rainbow-delimiters-depth-1">]</span>
+<span class="org-variable-name">dMirrdH</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>0<span class="org-rainbow-delimiters-depth-1">]</span>
+<span class="org-variable-name">Mirr</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>0<span class="org-rainbow-delimiters-depth-1">]</span>
+<span class="org-variable-name">M</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>0<span class="org-rainbow-delimiters-depth-1">]</span>
+
+<span class="org-variable-name">DeltaH</span> <span class="org-operator">=</span> 20
+<span class="org-variable-name">Nfirst</span> <span class="org-operator">=</span> 125
+<span class="org-variable-name">Ndown</span> <span class="org-operator">=</span> 250
+<span class="org-variable-name">Nup</span> <span class="org-operator">=</span> 250
+
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-1">(</span>Nfirst<span class="org-rainbow-delimiters-depth-1">)</span>:
+    H.append<span class="org-rainbow-delimiters-depth-1">(</span>H<span class="org-rainbow-delimiters-depth-2">[</span>i<span class="org-rainbow-delimiters-depth-2">]</span> <span class="org-operator">+</span> DeltaH<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-1">(</span>Ndown<span class="org-rainbow-delimiters-depth-1">)</span>:
+    H.append<span class="org-rainbow-delimiters-depth-1">(</span>H<span class="org-rainbow-delimiters-depth-2">[</span><span class="org-operator">-</span>1<span class="org-rainbow-delimiters-depth-2">]</span> <span class="org-operator">-</span> DeltaH<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-1">(</span>Nup<span class="org-rainbow-delimiters-depth-1">)</span>:
+    H.append<span class="org-rainbow-delimiters-depth-1">(</span>H<span class="org-rainbow-delimiters-depth-2">[</span><span class="org-operator">-</span>1<span class="org-rainbow-delimiters-depth-2">]</span> <span class="org-operator">+</span> DeltaH<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-variable-name">delta</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>0<span class="org-rainbow-delimiters-depth-1">]</span>
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-builtin">len</span><span class="org-rainbow-delimiters-depth-2">(</span>H<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-operator">-</span> 1<span class="org-rainbow-delimiters-depth-1">)</span>:
+    <span class="org-keyword">if</span> H<span class="org-rainbow-delimiters-depth-1">[</span>i <span class="org-operator">+</span> 1<span class="org-rainbow-delimiters-depth-1">]</span> <span class="org-operator">&gt;</span> H<span class="org-rainbow-delimiters-depth-1">[</span>i<span class="org-rainbow-delimiters-depth-1">]</span>:
+        delta.append<span class="org-rainbow-delimiters-depth-1">(</span>1<span class="org-rainbow-delimiters-depth-1">)</span>
+    <span class="org-keyword">else</span>:
+        delta.append<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-operator">-</span>1<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">L</span><span class="org-rainbow-delimiters-depth-1">(</span>x<span class="org-rainbow-delimiters-depth-1">)</span>:
+    <span class="org-keyword">return</span> <span class="org-rainbow-delimiters-depth-1">(</span>np.cosh<span class="org-rainbow-delimiters-depth-2">(</span>x<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-operator">/</span> np.sinh<span class="org-rainbow-delimiters-depth-2">(</span>x<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-operator">-</span> <span class="org-rainbow-delimiters-depth-1">(</span>1 <span class="org-operator">/</span> x<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-1">(</span>Nfirst <span class="org-operator">+</span> Ndown <span class="org-operator">+</span> Nup<span class="org-rainbow-delimiters-depth-1">)</span>:
+    Man.append<span class="org-rainbow-delimiters-depth-1">(</span>Ms <span class="org-operator">*</span> <span class="org-rainbow-delimiters-depth-2">(</span>1 <span class="org-operator">/</span> np.tanh<span class="org-rainbow-delimiters-depth-3">(</span><span class="org-rainbow-delimiters-depth-4">(</span>H<span class="org-rainbow-delimiters-depth-5">[</span>i <span class="org-operator">+</span> 1<span class="org-rainbow-delimiters-depth-5">]</span> <span class="org-operator">+</span> alpha <span class="org-operator">*</span> M<span class="org-rainbow-delimiters-depth-5">[</span>i<span class="org-rainbow-delimiters-depth-5">]</span><span class="org-rainbow-delimiters-depth-4">)</span> <span class="org-operator">/</span> a<span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-operator">-</span> a <span class="org-operator">/</span> <span class="org-rainbow-delimiters-depth-3">(</span>H<span class="org-rainbow-delimiters-depth-4">[</span>i <span class="org-operator">+</span> 1<span class="org-rainbow-delimiters-depth-4">]</span> <span class="org-operator">+</span> alpha <span class="org-operator">*</span> M<span class="org-rainbow-delimiters-depth-4">[</span>i<span class="org-rainbow-delimiters-depth-4">]</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+    dMirrdH.append<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">(</span>Man<span class="org-rainbow-delimiters-depth-3">[</span>i<span class="org-operator">+</span>1<span class="org-rainbow-delimiters-depth-3">]</span> <span class="org-operator">-</span> M<span class="org-rainbow-delimiters-depth-3">[</span>i<span class="org-rainbow-delimiters-depth-3">]</span><span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-operator">/</span> <span class="org-rainbow-delimiters-depth-2">(</span>k <span class="org-operator">*</span> delta<span class="org-rainbow-delimiters-depth-3">[</span>i<span class="org-operator">+</span>1<span class="org-rainbow-delimiters-depth-3">]</span> <span class="org-operator">-</span> alpha <span class="org-operator">*</span> <span class="org-rainbow-delimiters-depth-3">(</span>Man<span class="org-rainbow-delimiters-depth-4">[</span>i <span class="org-operator">+</span> 1<span class="org-rainbow-delimiters-depth-4">]</span> <span class="org-operator">-</span> M<span class="org-rainbow-delimiters-depth-4">[</span>i<span class="org-rainbow-delimiters-depth-4">]</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+    Mirr.append<span class="org-rainbow-delimiters-depth-1">(</span>Mirr<span class="org-rainbow-delimiters-depth-2">[</span>i<span class="org-rainbow-delimiters-depth-2">]</span> <span class="org-operator">+</span> dMirrdH<span class="org-rainbow-delimiters-depth-2">[</span>i <span class="org-operator">+</span> 1<span class="org-rainbow-delimiters-depth-2">]</span> <span class="org-operator">*</span> <span class="org-rainbow-delimiters-depth-2">(</span>H<span class="org-rainbow-delimiters-depth-3">[</span>i<span class="org-operator">+</span>1<span class="org-rainbow-delimiters-depth-3">]</span> <span class="org-operator">-</span> H<span class="org-rainbow-delimiters-depth-3">[</span>i<span class="org-rainbow-delimiters-depth-3">]</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+    M.append<span class="org-rainbow-delimiters-depth-1">(</span>c <span class="org-operator">*</span> Man<span class="org-rainbow-delimiters-depth-2">[</span>i <span class="org-operator">+</span> 1<span class="org-rainbow-delimiters-depth-2">]</span> <span class="org-operator">+</span> <span class="org-rainbow-delimiters-depth-2">(</span>1 <span class="org-operator">-</span> c<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-operator">*</span> Mirr<span class="org-rainbow-delimiters-depth-2">[</span>i <span class="org-operator">+</span> 1<span class="org-rainbow-delimiters-depth-2">]</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Plot the figure</span>
+<span class="org-variable-name">fig</span> <span class="org-operator">=</span> plt.figure<span class="org-rainbow-delimiters-depth-1">()</span>
+<span class="org-variable-name">ax</span> <span class="org-operator">=</span> fig.add_subplot<span class="org-rainbow-delimiters-depth-1">(</span>1, 1, 1<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Move left y-axis and bottom x-axis to centre, passing through (0,0)</span>
+ax.spines<span class="org-rainbow-delimiters-depth-1">[</span><span class="org-string">'left'</span><span class="org-rainbow-delimiters-depth-1">]</span>.set_position<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">'center'</span><span class="org-rainbow-delimiters-depth-1">)</span>
+ax.spines<span class="org-rainbow-delimiters-depth-1">[</span><span class="org-string">'bottom'</span><span class="org-rainbow-delimiters-depth-1">]</span>.set_position<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">'center'</span><span class="org-rainbow-delimiters-depth-1">)</span>
+plt.plot<span class="org-rainbow-delimiters-depth-1">(</span>H, M<span class="org-rainbow-delimiters-depth-1">)</span>
+
+cp.store_fig<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">"hysteresis-curve"</span>, close<span class="org-operator">=</span><span class="org-constant">True</span><span class="org-rainbow-delimiters-depth-1">)</span>
+</pre>
+</div>
+
+
+<div id="orgd08a8b5" class="figure">
+<p><img src="images/Magnetic-Circuits-and-Materials/hysteresis-curve.png" alt="hysteresis-curve.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org22e6fec" class="outline-3">
+<h3 id="org22e6fec">Atomic Structure of Electric Grain Steel</h3>
+<div class="outline-text-3" id="text-org22e6fec">
+<p>
+Electrical steel is speciality steel used in the cores of electromagnetic devices
+such as motors, generators, and transformers because it reduces power loss.
+</p>
+
+<p>
+It is an iron alloy with silicon as the main additive element (instead of carbon).
+The exact formulation is tailored to produce specific magnetic properties:
+</p>
+<ul class="org-ul">
+<li>small hysteresis area resulting in low power loss per cycle,</li>
+<li>low core loss,</li>
+<li>and high permeability.</li>
+</ul>
+
+<p>
+Below is the code for drawing the atomic structure of the electric grain steel.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asymptote" id="orgf41977b"><span class="org-constant">settings</span>.render = 4;
+<span class="org-constant">settings</span>.outformat = <span class="org-string">"png"</span>;
+
+<span class="org-builtin">import</span> three;
+
+<span class="org-constant">currentprojection</span>=perspective<span class="org-rainbow-delimiters-depth-1">(</span>200,-950,500<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-type">pen</span> <span class="org-variable-name">Slide</span> = <span class="org-function-name">RGB</span><span class="org-rainbow-delimiters-depth-1">(</span>250, 250, 250<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-comment-delimiter">//</span><span class="org-comment">pen Slide = RGB(54, 58, 79);</span>
+<span class="org-constant">currentlight</span>.<span class="org-constant">background</span> = Slide;
+
+<span class="org-type">surface</span> <span class="org-variable-name">carbon</span>=<span class="org-function-name">scale3</span><span class="org-rainbow-delimiters-depth-1">(</span>40<span class="org-rainbow-delimiters-depth-1">)</span>*unitsphere; <span class="org-comment-delimiter">// </span><span class="org-comment">70 pm</span>
+<span class="org-type">surface</span> <span class="org-variable-name">hydrogen</span>=<span class="org-function-name">scale3</span><span class="org-rainbow-delimiters-depth-1">(</span>50<span class="org-rainbow-delimiters-depth-1">)</span>*unitsphere; <span class="org-comment-delimiter">// </span><span class="org-comment">25 pm</span>
+
+<span class="org-type">real</span> <span class="org-variable-name">alpha</span>=90;
+
+<span class="org-type">real</span> <span class="org-variable-name">CCbond</span>=100; <span class="org-comment-delimiter">// </span><span class="org-comment">156 pm</span>
+<span class="org-type">real</span> <span class="org-variable-name">CHbond</span>=150; <span class="org-comment-delimiter">// </span><span class="org-comment">110 pm</span>
+
+<span class="org-type">triple</span> <span class="org-variable-name">c1</span>=<span class="org-rainbow-delimiters-depth-1">(</span>0,0,0<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">c2</span>=<span class="org-rainbow-delimiters-depth-1">(</span>200,0,0<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">c3</span>=<span class="org-rainbow-delimiters-depth-1">(</span>200,200,0<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">c4</span>=<span class="org-rainbow-delimiters-depth-1">(</span>0,200,0<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-type">triple</span> <span class="org-variable-name">c5</span>=<span class="org-rainbow-delimiters-depth-1">(</span>0,0,200<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">c6</span>=<span class="org-rainbow-delimiters-depth-1">(</span>200,0,200<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">c7</span>=<span class="org-rainbow-delimiters-depth-1">(</span>200,200,200<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">c8</span>=<span class="org-rainbow-delimiters-depth-1">(</span>0,200,200<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-type">triple</span> <span class="org-variable-name">c9</span>=<span class="org-rainbow-delimiters-depth-1">(</span>100,100,100<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-type">pen</span> <span class="org-constant">Black</span>=<span class="org-function-name">gray</span><span class="org-rainbow-delimiters-depth-1">(</span>0.7<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c1<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c2<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c3<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c4<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c5<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c6<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c7<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c8<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">shift</span><span class="org-rainbow-delimiters-depth-2">(</span>c9<span class="org-rainbow-delimiters-depth-2">)</span>*carbon,<span class="org-constant">Black</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-type">pen</span> <span class="org-variable-name">thick</span>=<span class="org-function-name">linewidth</span><span class="org-rainbow-delimiters-depth-1">(</span>10<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c1--c2--c3--c4--<span class="org-builtin">cycle</span>,thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c5--c6--c7--c8--<span class="org-builtin">cycle</span>,thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c1--c5, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c2--c6, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c3--c7, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c4--c8, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c1--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c2--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c3--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c4--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c5--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c6--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c7--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span>c8--c9, thick<span class="org-rainbow-delimiters-depth-1">)</span>;
+</pre>
+</div>
+
+
+<div id="orgcc02b17" class="figure">
+<p><img src="images/Magnetic-Circuits-and-Materials/electric-grain-steel-structure.png" alt="electric-grain-steel-structure.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-asymptote" id="org1d9186b"><span class="org-constant">settings</span>.render = 2;
+<span class="org-comment-delimiter">//</span><span class="org-comment">settings.outformat = "png";</span>
+<span class="org-builtin">import</span> tube;
+<span class="org-builtin">import</span> graph3;
+<span class="org-function-name">size</span><span class="org-rainbow-delimiters-depth-1">(</span>10<span class="org-constant">cm</span>,0<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-constant">currentprojection</span>=orthographic<span class="org-rainbow-delimiters-depth-1">(</span>2,4,2,zoom=1,center=<span class="org-builtin">true</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+
+<span class="org-type">pen</span> <span class="org-variable-name">Slide</span> = <span class="org-function-name">RGB</span><span class="org-rainbow-delimiters-depth-1">(</span>250, 250, 250<span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-constant">currentlight</span>.<span class="org-constant">background</span> = Slide;
+
+<span class="org-type">real</span> <span class="org-function-name">x</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">real</span> <span class="org-variable-name">t</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span><span class="org-builtin">return</span> .03*t;<span class="org-rainbow-delimiters-depth-1">}</span>
+<span class="org-type">real</span> <span class="org-function-name">y</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">real</span> <span class="org-variable-name">t</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span><span class="org-builtin">return</span> .5cos<span class="org-rainbow-delimiters-depth-2">(</span>t<span class="org-rainbow-delimiters-depth-2">)</span>;<span class="org-rainbow-delimiters-depth-1">}</span>
+<span class="org-type">real</span> <span class="org-function-name">z</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">real</span> <span class="org-variable-name">t</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span><span class="org-builtin">return</span> .5sin<span class="org-rainbow-delimiters-depth-2">(</span>t<span class="org-rainbow-delimiters-depth-2">)</span>;<span class="org-rainbow-delimiters-depth-1">}</span>
+<span class="org-type">real</span> <span class="org-variable-name">tmin</span>=0,<span class="org-variable-name">tmax</span>=40<span class="org-constant">pi</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">A</span>=<span class="org-rainbow-delimiters-depth-1">(</span>x<span class="org-rainbow-delimiters-depth-2">(</span>tmin<span class="org-rainbow-delimiters-depth-2">)</span>-.5,y<span class="org-rainbow-delimiters-depth-2">(</span>tmin<span class="org-rainbow-delimiters-depth-2">)</span>,z<span class="org-rainbow-delimiters-depth-2">(</span>tmin<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">triple</span> <span class="org-variable-name">B</span>=<span class="org-rainbow-delimiters-depth-1">(</span>x<span class="org-rainbow-delimiters-depth-2">(</span>tmax<span class="org-rainbow-delimiters-depth-2">)</span>+.5,y<span class="org-rainbow-delimiters-depth-2">(</span>tmax<span class="org-rainbow-delimiters-depth-2">)</span>,z<span class="org-rainbow-delimiters-depth-2">(</span>tmax<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">path3</span> <span class="org-variable-name">p</span>=A--<span class="org-function-name">graph</span><span class="org-rainbow-delimiters-depth-1">(</span>x,y,z,0,36<span class="org-constant">pi</span>,<span class="org-builtin">operator</span> ..<span class="org-rainbow-delimiters-depth-1">)</span>--B;
+<span class="org-type">path</span> <span class="org-variable-name">section</span>=<span class="org-function-name">scale</span><span class="org-rainbow-delimiters-depth-1">(</span>.05<span class="org-rainbow-delimiters-depth-1">)</span>*<span class="org-constant">unitcircle</span>;
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Define a pen wich depends of a real t. t represent the "reltime" of the path3 p.</span>
+<span class="org-type">pen</span> <span class="org-function-name">pen</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">real</span> <span class="org-variable-name">t</span><span class="org-rainbow-delimiters-depth-1">){</span><span class="org-builtin">return</span> <span class="org-constant">brown</span>+<span class="org-constant">gray</span>;<span class="org-rainbow-delimiters-depth-1">}</span>
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Here the section has colored segments (by default) depending to reltime.</span>
+<span class="org-function-name">draw</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-function-name">tube</span><span class="org-rainbow-delimiters-depth-2">(</span>p,coloredpath<span class="org-rainbow-delimiters-depth-3">(</span>section,<span class="org-type">pen</span><span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+
+
+</pre>
+</div>
+
+
+<div id="org58055d3" class="figure">
+<p><img src="images/Magnetic-Circuits-and-Materials/solenoid.png" alt="solenoid.png" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgf32d00c"><span class="org-keyword">import</span> pandas <span class="org-keyword">as</span> pd
+<span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+<span class="org-keyword">import</span> matplotlib.pyplot  <span class="org-keyword">as</span> plt
+<span class="org-keyword">from</span> scipy.optimize <span class="org-keyword">import</span> curve_fit
+
+<span class="org-variable-name">df</span> <span class="org-operator">=</span> pd.read_csv<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">'/Users/danielmcguiness/Downloads/plot-data(1).csv'</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-variable-name">H</span><span class="org-operator">=</span>df<span class="org-rainbow-delimiters-depth-1">[</span><span class="org-string">"x"</span><span class="org-rainbow-delimiters-depth-1">]</span>.to_numpy<span class="org-rainbow-delimiters-depth-1">()</span>
+<span class="org-variable-name">B</span><span class="org-operator">=</span>df<span class="org-rainbow-delimiters-depth-1">[</span><span class="org-string">"y"</span><span class="org-rainbow-delimiters-depth-1">]</span>.to_numpy<span class="org-rainbow-delimiters-depth-1">()</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">sigmoid</span><span class="org-rainbow-delimiters-depth-1">(</span>x, L ,x0, k, b<span class="org-rainbow-delimiters-depth-1">)</span>:
+    <span class="org-variable-name">y</span> <span class="org-operator">=</span> L <span class="org-operator">/</span> <span class="org-rainbow-delimiters-depth-1">(</span>1 <span class="org-operator">+</span> np.exp<span class="org-rainbow-delimiters-depth-2">(</span><span class="org-operator">-</span>k<span class="org-operator">*</span><span class="org-rainbow-delimiters-depth-3">(</span>x<span class="org-operator">-</span>x0<span class="org-rainbow-delimiters-depth-3">)</span><span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-operator">+</span> b
+    <span class="org-keyword">return</span> <span class="org-rainbow-delimiters-depth-1">(</span>y<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-variable-name">p0</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span><span class="org-builtin">max</span><span class="org-rainbow-delimiters-depth-2">(</span>B<span class="org-rainbow-delimiters-depth-2">)</span>, np.median<span class="org-rainbow-delimiters-depth-2">(</span>H<span class="org-rainbow-delimiters-depth-2">)</span>,1,<span class="org-builtin">min</span><span class="org-rainbow-delimiters-depth-2">(</span>B<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">]</span> <span class="org-comment-delimiter"># </span><span class="org-comment">this is an mandatory initial guess</span>
+
+<span class="org-variable-name">popt</span>, <span class="org-variable-name">pcov</span> <span class="org-operator">=</span> curve_fit<span class="org-rainbow-delimiters-depth-1">(</span>sigmoid, H, B,p0, method<span class="org-operator">=</span><span class="org-string">'dogbox'</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">set the title</span>
+plt.plot<span class="org-rainbow-delimiters-depth-1">(</span>H,B<span class="org-rainbow-delimiters-depth-1">)</span>
+plt.plot<span class="org-rainbow-delimiters-depth-1">(</span>H,pcov, pcov, <span class="org-string">'-'</span>, label<span class="org-operator">=</span><span class="org-string">'s=0'</span><span class="org-rainbow-delimiters-depth-1">)</span>
+plt.show<span class="org-rainbow-delimiters-depth-1">()</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">show the plot</span>
+cp.store_fig<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">"m-5-steel-magnetisation"</span>, close<span class="org-operator">=</span><span class="org-constant">True</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgdec98e5" class="outline-2">
+<h2 id="orgdec98e5">Magnetic Field Lines</h2>
+<div class="outline-text-2" id="text-orgdec98e5">
+<p>
+Magnetic Field lines (<img src="ltximg/Magnetic-Circuits-and-Materials_b56d75b117012beab6f3f018a5e0ffdd82d87cf6.png" alt="$\vec{B}$" />) are the ways in which
+we describe the materials magnetic usability. The following
+code snippet and its output showcases the effect of having
+a material with <span class="Hlight">high permeability</span> compared to
+a magnetically inert material like air.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org49c6a7e"><span class="org-comment-delimiter"># </span><span class="org-comment">imports</span>
+<span class="org-keyword">import</span> numpy <span class="org-keyword">as</span> np
+<span class="org-keyword">import</span> matplotlib.pyplot <span class="org-keyword">as</span> plt
+<span class="org-keyword">import</span> magpylib <span class="org-keyword">as</span> magpy
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">create figure</span>
+<span class="org-variable-name">fig</span> <span class="org-operator">=</span> plt.figure<span class="org-rainbow-delimiters-depth-1">(</span>figsize<span class="org-operator">=</span><span class="org-rainbow-delimiters-depth-2">(</span>8,8<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-variable-name">ax1</span> <span class="org-operator">=</span> fig.add_subplot<span class="org-rainbow-delimiters-depth-1">(</span>111<span class="org-rainbow-delimiters-depth-1">)</span>                   <span class="org-comment-delimiter"># </span><span class="org-comment">this is a 2D-plotting-axis</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">create magnets</span>
+<span class="org-variable-name">s1</span> <span class="org-operator">=</span> magpy.source.magnet.Box<span class="org-rainbow-delimiters-depth-1">(</span>mag<span class="org-operator">=</span><span class="org-rainbow-delimiters-depth-2">[</span>0,0,600<span class="org-rainbow-delimiters-depth-2">]</span>,dim<span class="org-operator">=</span><span class="org-rainbow-delimiters-depth-2">[</span>3,3,3<span class="org-rainbow-delimiters-depth-2">]</span>,pos<span class="org-operator">=</span><span class="org-rainbow-delimiters-depth-2">[</span><span class="org-operator">-</span>4,0,3<span class="org-rainbow-delimiters-depth-2">]</span><span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-variable-name">s2</span> <span class="org-operator">=</span> magpy.source.magnet.Cylinder<span class="org-rainbow-delimiters-depth-1">(</span>mag<span class="org-operator">=</span><span class="org-rainbow-delimiters-depth-2">[</span>0,0,500<span class="org-rainbow-delimiters-depth-2">]</span>, dim<span class="org-operator">=</span><span class="org-rainbow-delimiters-depth-2">[</span>3,5<span class="org-rainbow-delimiters-depth-2">]</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">manipulate magnets</span>
+s1.rotate<span class="org-rainbow-delimiters-depth-1">(</span>45,<span class="org-rainbow-delimiters-depth-2">[</span>0,1,0<span class="org-rainbow-delimiters-depth-2">]</span>,anchor<span class="org-operator">=</span><span class="org-rainbow-delimiters-depth-2">[</span>0,0,0<span class="org-rainbow-delimiters-depth-2">]</span><span class="org-rainbow-delimiters-depth-1">)</span>
+s2.move<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">[</span>5,0,<span class="org-operator">-</span>4<span class="org-rainbow-delimiters-depth-2">]</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">create collection</span>
+<span class="org-variable-name">c</span> <span class="org-operator">=</span> magpy.Collection<span class="org-rainbow-delimiters-depth-1">(</span>s1,s2<span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">display system geometry on ax1</span>
+<span class="org-comment-delimiter">#</span><span class="org-comment">magpy.displaySystem(c,subplotAx=ax1,suppress=True)</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">calculate B-field on a grid</span>
+<span class="org-variable-name">xs</span> <span class="org-operator">=</span> np.linspace<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-operator">-</span>10,10,29<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-variable-name">zs</span> <span class="org-operator">=</span> np.linspace<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-operator">-</span>10,10,29<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-variable-name">Bs</span> <span class="org-operator">=</span> np.array<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-rainbow-delimiters-depth-2">[</span><span class="org-rainbow-delimiters-depth-3">[</span>c.getB<span class="org-rainbow-delimiters-depth-4">(</span><span class="org-rainbow-delimiters-depth-5">[</span>x,0,z<span class="org-rainbow-delimiters-depth-5">]</span><span class="org-rainbow-delimiters-depth-4">)</span> <span class="org-keyword">for</span> x <span class="org-keyword">in</span> xs<span class="org-rainbow-delimiters-depth-3">]</span> <span class="org-keyword">for</span> z <span class="org-keyword">in</span> zs<span class="org-rainbow-delimiters-depth-2">]</span><span class="org-rainbow-delimiters-depth-1">)</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">display field in xz-plane using matplotlib</span>
+<span class="org-variable-name">X</span>,<span class="org-variable-name">Z</span> <span class="org-operator">=</span> np.meshgrid<span class="org-rainbow-delimiters-depth-1">(</span>xs,zs<span class="org-rainbow-delimiters-depth-1">)</span>
+<span class="org-variable-name">U</span>,<span class="org-variable-name">V</span> <span class="org-operator">=</span> Bs<span class="org-rainbow-delimiters-depth-1">[</span>:,:,0<span class="org-rainbow-delimiters-depth-1">]</span>, Bs<span class="org-rainbow-delimiters-depth-1">[</span>:,:,2<span class="org-rainbow-delimiters-depth-1">]</span>
+ax1.streamplot<span class="org-rainbow-delimiters-depth-1">(</span>X, Z, U, V, color<span class="org-operator">=</span>np.log<span class="org-rainbow-delimiters-depth-2">(</span>U<span class="org-operator">**</span>2<span class="org-operator">+</span>V<span class="org-operator">**</span>2<span class="org-rainbow-delimiters-depth-2">)</span>,density<span class="org-operator">=</span>2<span class="org-rainbow-delimiters-depth-1">)</span>
+
+
+cp.store_fig<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-string">"magnetic-field-lines"</span>, close<span class="org-operator">=</span><span class="org-constant">True</span><span class="org-rainbow-delimiters-depth-1">)</span>l
+
+</pre>
+</div>
+
+
+<div id="org3670bbf" class="figure">
+<p><img src="images/Magnetic-Circuits-and-Materials/magnetic-field-lines.png" alt="magnetic-field-lines.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Daniel McGuiness</p>
+</div>
+</body>
+</html>
