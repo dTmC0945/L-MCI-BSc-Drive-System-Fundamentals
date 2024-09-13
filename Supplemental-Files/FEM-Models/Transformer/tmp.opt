@@ -1,0 +1,5 @@
+For k In {0:PostProcessing.NbViews-1}
+View[k].RangeType = 3;
+View[k].NbIso = 25;
+View[k].IntervalsType = 3;
+EndFor
