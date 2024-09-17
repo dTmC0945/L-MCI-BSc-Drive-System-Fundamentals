@@ -103,7 +103,7 @@ The structure of the lecture is shown below.
 |----|----|----|----|
 | 1 | Introduction | Discussion of the lecture structure and what will be covered | 1 |
 | 2 | Return to Fundamentals | A quick view on mathematical necessity for poly-phase circuit analysis | 1 |
-| 3 | Magnetic Circuit and Material | Magnetic Materials and Inductance | 1 |
+| 3 | Magnetic Circuits and Materials | Magnetic Materials and Inductance | 1 |
 | 4 | Transfomer | Construction, Analysis and operation | 2 |
 | 5 | Electromechanical Energy Conversion | Energy co-energy, flux-linkage, etc. | 2-3 |
 | 6 | Rotating Magnetic Fields | MMF, waveforms, space harmonics | 3 |
